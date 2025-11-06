@@ -1,0 +1,16 @@
+---
+description: Require sanity verification after each implementation step.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+- After each completed task, stop and verify that:
+  - Affected files exist
+  - Routes load without error
+  - Functions are defined and exported correctly
+  - Types compile (where applicable)
+- Prevent Cursor from starting a new task until verification is confirmed.
+- If verification fails, halt execution and summarize blocking issue.
+- Require test, manual check, or file trace before marking task complete.
+- For each checkpoint, log status as: ✅ VERIFIED / 🔧 NEEDS FIX / 🛑 BLOCKED.
+- Reflect the checkpoint status in responses before continuing implementation.

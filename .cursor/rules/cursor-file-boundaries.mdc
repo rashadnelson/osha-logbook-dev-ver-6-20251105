@@ -1,0 +1,16 @@
+---
+description: Enforce file ownership boundaries to prevent logic leakage.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+- Treat each folder under `/app/`, `/server/`, and `/lib/` as a distinct domain.
+- Never mix UI logic with API handlers.
+- Never place database logic outside `/server/core/db`.
+- CSV logic belongs only in `/lib/csv/`.
+- Auth, subscription, and session logic must stay under `context/`, `hooks/`, or `middleware/`.
+- Component code must not reference API routes directly.
+- Disallow multi-domain changes unless explicitly approved.
+- Forbid creation of new files across multiple directories in a single task.
+- Respect `.mdc` glob scopes when proposing edits or new files.
+- Flag cross-boundary edits as potential architectural violations unless justified.

@@ -1,0 +1,19 @@
+---
+description: Live sanity tracking of task status, verification, and phase integrity.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+- Maintain internal memory of:
+  - Active phase
+  - Last completed task
+  - Last verification status (✅ / 🔧 / 🛑)
+  - Blocking issues (if any)
+- At the start of each interaction, summarize:
+  - "Phase: [Name]"
+  - "Last Task: [Task Label] — [Status]"
+  - "Status: IN PHASE / AHEAD / BLOCKED"
+- If BLOCKED, do not proceed until user confirms resolution.
+- If task verified, allow next.
+- Update the dashboard in real time as tasks complete.
+- Treat dashboard state as canonical between Cursor sessions.

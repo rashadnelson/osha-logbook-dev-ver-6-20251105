@@ -1,0 +1,13 @@
+---
+description: Constrain Cursor to only operate on the current active development phase.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+- Cross-reference `phased-tasks.json` and `implementation-plan.mdc` to determine the current active phase.
+- Ignore requests that attempt to jump forward unless explicitly instructed by user.
+- If user asks for unrelated feature, respond: “Outside current phase. Proceed anyway?”
+- Stay scoped to one feature group at a time.
+- Only suggest tasks or edits that map to the current phase checklist.
+- Always identify the current phase in response metadata.
+- Reject premature optimizations, dashboards, or enhancements.

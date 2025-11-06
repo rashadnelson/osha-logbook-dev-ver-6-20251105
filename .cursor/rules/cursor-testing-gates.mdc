@@ -1,0 +1,16 @@
+---
+description: Require passing tests or file validation before completing a dev phase.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+- Before marking any phase complete, ensure:
+  - E2E tests run for user flow (Playwright)
+  - Unit tests exist for business logic (Vitest)
+  - Components are tested for interaction/validation (Testing Library)
+- CSV-related code must snapshot test expected output.
+- Reject completion of implementation steps unless:
+  - A file runs without error
+  - Or a test passes
+- Include testing signal in final message: ✅ TESTED or ❌ UNVERIFIED.
+- Encourage Cursor to generate missing tests if none exist.

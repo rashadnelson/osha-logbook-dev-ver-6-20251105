@@ -1,0 +1,15 @@
+---
+description: Enforce OSHA Logbook’s architectural and domain-specific implementation patterns.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+- When working on forms, always apply: Zod schema → react-hook-form → tRPC mutation.
+- All subscription checks must follow: Clerk session → `hasActiveSubscription()` → tRPC middleware → UI fallback.
+- All OSHA incident fields must match 300/301 CSV spec exactly. No extras.
+- Always compute 300A summaries dynamically from incidents, never store in DB.
+- Export logic must follow: fetch via tRPC → validate with Zod → build CSV in browser → trigger download.
+- Use Tailwind + shadcn/ui + aria attributes for accessible, spaced UI.
+- On auth, enforce Clerk email-only. No orgs. One subscription per establishment/year.
+- Persist `establishmentId` and `year` in URL and React Context.
+- Show upgrade CTA when mutations are blocked. Use `FORBIDDEN` error for backend denial.

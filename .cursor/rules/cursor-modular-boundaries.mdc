@@ -1,0 +1,17 @@
+---
+description: Restrict Cursor to domain-specific edits per task to prevent architectural leakage.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+- Each feature domain (incidents, csv, subscriptions, etc) must be treated independently.
+- Never edit multiple domains (e.g., auth + CSV) in the same step.
+- Reject implementation if task touches more than one of:
+  - UI components
+  - API handlers
+  - DB schema
+  - CSV builders
+- Force user to break complex tasks into smaller per-domain subtasks.
+- Require explicit reason before crossing domain boundaries in any implementation.
+- Mirror `.cursor/rules/*.mdc` scopes to align edits with rule domains.
+- Always group edits by domain and ask for confirmation if deviation occurs.

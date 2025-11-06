@@ -1,0 +1,16 @@
+---
+description: Central mental model enforcement for OSHA Logbook architecture.
+globs: ["**/*"]
+alwaysApply: true
+---
+
+- Maintain a working mental model of the OSHA Logbook app at all times.
+- Treat the app as a Next.js 14 SaaS for OSHA CSV compliance by safety officers.
+- Assume core flows: login → select establishment → select year → log incidents → compute 300A → export CSV.
+- Always bind all logic to `establishmentId` and `year` as primary keys.
+- Never implement CSV logic server-side. Enforce client-only browser execution.
+- Load auth + subscription logic using Clerk. Validate per establishment/year.
+- Enforce strict separation of domain boundaries: incidents, subscriptions, CSV, UI.
+- Reflect architectural decisions from `masterplan.mdc` and `implementation-plan.mdc` at every step.
+- Treat `.cursor/rules/*.mdc` files as hard governance, not suggestions.
+- Never propose code without reasoning from this mental model first.
