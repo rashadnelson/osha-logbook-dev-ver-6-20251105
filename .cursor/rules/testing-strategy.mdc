@@ -1,0 +1,14 @@
+---
+description: End-to-end and unit testing strategy for OSHA Logbook.
+globs: ["tests/**"]
+---
+
+- Use Playwright for E2E testing across all page routes in `/app/**`.
+- Use React Testing Library for component-level validation.
+- Use Vitest for unit testing all business logic and CSV builders.
+- Add `data-testid` attributes to all interactive form fields and buttons.
+- Test OSHA incident entry with missing/invalid values → should fail.
+- Test valid OSHA entries → should pass and export.
+- Snapshot test CSV outputs for Form 300, 300A, and 301.
+- Mock Clerk in all tests; use test-only `useTestSession()` provider.
+- Run CI tests on PR using GitHub Actions before Railway deploy.

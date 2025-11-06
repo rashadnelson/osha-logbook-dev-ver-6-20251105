@@ -1,0 +1,15 @@
+---
+description: Reusable Tailwind v4 UI patterns for OSHA forms, tables, and layout.
+globs: ["app/components/ui/**"]
+---
+
+- Use shadcn/ui for all base components: `Button`, `Input`, `Card`, `Dialog`.
+- All forms use consistent Field wrapper: label, input, error.
+- Use Tailwind spacing: `gap-4`, `p-6`, `max-w-3xl mx-auto`.
+- Page headers must use `text-2xl font-semibold tracking-tight`.
+- Buttons: primary = `bg-black text-white hover:opacity-90`, secondary = `border`.
+- All tables include: header, row actions, empty state, pagination.
+- Use `grid` for form layout with `grid-cols-1 sm:grid-cols-2` by default.
+- Apply `rounded-2xl shadow-sm` to all form cards.
+- Match form control height: `h-10` minimum for inputs and selects.
+- Include `Skeleton` loader components for all async views.

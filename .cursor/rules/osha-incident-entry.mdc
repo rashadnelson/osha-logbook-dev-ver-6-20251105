@@ -1,0 +1,15 @@
+---
+description: Rules for creating, validating, and storing OSHA 300/301 incident entries.
+globs: ["app/**/incident/**", "server/api/incidentRouter.ts"]
+---
+
+- All incident forms must use Zod schemas with 1:1 mapping to CSV fields.
+- Each incident must belong to an establishment and a specific year.
+- Use `react-hook-form` + `zodResolver` to wire validation.
+- No form may be submitted unless all required fields pass validation.
+- Store incidents via tRPC mutation: `ctx.db.insert(incidents).values(...)`.
+- Prevent duplicate incidents via composite key (establishmentId + date + name).
+- Include audit fields: createdAt, updatedAt.
+- Allow updates only if subscription is valid.
+- Group fields by OSHA logical sections (e.g. employee info, injury, treatment).
+- Use optimistic UI when saving incident, fallback with error banner on failure.

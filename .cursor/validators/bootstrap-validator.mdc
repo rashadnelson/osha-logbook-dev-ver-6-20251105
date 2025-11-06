@@ -1,0 +1,18 @@
+﻿# bootstrap-validator.mdc
+
+## PURPOSE
+Validate the baseline SaaS project after bootstrap.
+
+## CHECKLIST
+
+1) Next.js 14+ App Router exists (confirm /app)
+2) Tailwind exists (tailwind.config + postcss.config)
+3) Drizzle exists (server/core/db/index.ts)
+4) Env placeholders exist (.env.local)
+5) Sentry configs exist (sentry.*.config.ts)
+
+## SUCCESS SIGNAL
+
+When all checks pass, reply:
+
+BOOTSTRAP VALID âœ…

@@ -1,0 +1,15 @@
+---
+description: Drizzle ORM schema definitions and modeling constraints for OSHA Logbook.
+globs: ["server/db/schema.ts"]
+---
+
+- Define all tables using `pgTable()` from Drizzle.
+- Use `uuid()` for all primary keys and default to `randomUUID()`.
+- Include `userId`, `establishmentId`, and `year` in all core data models.
+- Use explicit `foreignKey()` definitions for all relational integrity.
+- Store dates as `date("incident_date")`, not as timestamps.
+- Use `varchar("field", { length: 255 })` for all text fields unless longer length is required.
+- Split OSHA incident data across `incidents`, `injuries`, and `treatments` tables if needed.
+- Normalize forms to match CSV column structure; avoid nested JSON blobs.
+- Use Drizzle `relations()` helper to define reverse associations.
+- Never use Prisma-style magic relations or inferred joins.

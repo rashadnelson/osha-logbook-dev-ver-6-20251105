@@ -1,0 +1,68 @@
+{
+  "phases": [
+    {
+      "name": "Phase 1 \u2014 Skeleton & Guardrails",
+      "tasks": [
+        "Create new Next.js 14 app (TS)",
+        "Install Tailwind v4, tRPC, Drizzle, Neon, Clerk, Resend, UploadThing, Sentry",
+        "Implement Neon connection and Drizzle schema baseline",
+        "Add Zod-based environment variable validation",
+        "Scaffold base layout + empty dashboard page"
+      ]
+    },
+    {
+      "name": "Phase 2 \u2014 Establishments",
+      "tasks": [
+        "Implement Drizzle schema for establishments",
+        "Create CRUD tRPC endpoints with protectedProcedure",
+        "Add UI: Add Establishment form, year selector"
+      ]
+    },
+    {
+      "name": "Phase 3 \u2014 OSHA Incident Logging",
+      "tasks": [
+        "Define Drizzle schema for OSHA 300/301 incident rows",
+        "Add strict Zod validation schema for all fields",
+        "Build incident entry UI and paginated list view"
+      ]
+    },
+    {
+      "name": "Phase 4 \u2014 OSHA 300A Computation",
+      "tasks": [
+        "Write pure function to compute OSHA 300A from rows",
+        "Display computed results live in UI (no DB caching)"
+      ]
+    },
+    {
+      "name": "Phase 5 \u2014 CSV Export",
+      "tasks": [
+        "Implement client-only CSV builder in `/lib/csv/`",
+        "Validate field coverage with Zod before export",
+        "On export button click \u2192 fetch data \u2192 build \u2192 download",
+        "Block export if required fields are missing"
+      ]
+    },
+    {
+      "name": "Phase 6 \u2014 Subscription Enforcement",
+      "tasks": [
+        "Require Clerk subscription per establishment per year",
+        "Enforce via tRPC middleware + UI read-only fallback"
+      ]
+    },
+    {
+      "name": "Phase 7 \u2014 Email & Uploads",
+      "tasks": [
+        "Trigger Resend email when year is created",
+        "Allow optional file uploads via UploadThing"
+      ]
+    },
+    {
+      "name": "Phase 8 \u2014 Deployment & Monitoring",
+      "tasks": [
+        "Deploy to Railway",
+        "Attach Sentry for frontend and backend",
+        "Configure Tailwind v4 and environment validation"
+      ]
+    }
+  ]
+}

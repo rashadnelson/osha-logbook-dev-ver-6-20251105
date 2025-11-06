@@ -1,0 +1,14 @@
+---
+description: Rule index for all .mdc files governing OSHA Logbook behavior.
+globs: []
+alwaysApply: true
+---
+
+- `masterplan.mdc`: Product goals, user value, architecture constraints.
+- `implementation-plan.mdc`: Phase-by-phase task breakdown.
+- `api-standards.mdc`: Drizzle-first API patterns for tRPC handlers.
+- `auth-&-subscription-rules.mdc`: Clerk-only login and access rules.
+- `data-model-schemas.mdc`: OSHA-specific schema and table guidance.
+- `deployment-railway.mdc`: Railway + Tailwind v4 + env enforcement.
+- `product-design-guidelines.mdc`: UX rules for safety officer clarity.
+- `testing-strategy.mdc`: Vitest, Playwright, and CSV export testing.

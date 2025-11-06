@@ -1,0 +1,13 @@
+---
+description: tRPC middleware to enforce subscription per establishment + year.
+globs: ["server/middleware/enforceSubscription.ts", "server/api/**/*.ts"]
+---
+
+- Middleware must verify Clerk session is active.
+- Load current user's subscriptions by `establishmentId` and `year`.
+- If no active subscription, throw `TRPCError({ code: "FORBIDDEN" })`.
+- Allow read-only queries without subscription.
+- Block all mutations (insert/update/delete) if no subscription found.
+- Attach middleware to all `protectedProcedure.mutation()` calls.
+- Add Sentry breadcrumb on subscription rejection.
+- Share `hasActiveSubscription(userId, establishmentId, year)` util across routers.

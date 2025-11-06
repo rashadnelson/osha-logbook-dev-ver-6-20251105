@@ -1,0 +1,15 @@
+---
+description: OSHA Logbook product design standards for safety officer usability.
+globs: ["app/**"]
+---
+
+- Design for non-technical safety officers: no jargon, minimal clicks.
+- Prioritize large, spaced UI elements with Tailwind v4 spacing scale.
+- All inputs must support `aria-label` and `data-testid` attributes.
+- Use form labels and helper text with consistent font hierarchy.
+- Disable submission buttons if Zod validation fails.
+- Validate OSHA-specific fields with clear inline error messaging.
+- Never hide validation errors behind modals or toasts.
+- All navigation must maintain active establishment + year in URL.
+- Use consistent CTA placement: top-right primary button in views.
+- Prefer `grid` over `flex` for form layouts to align labels and inputs.

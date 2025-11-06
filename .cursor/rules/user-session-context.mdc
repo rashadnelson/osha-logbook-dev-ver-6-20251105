@@ -1,0 +1,14 @@
+---
+description: Session management rules for Clerk user + establishment + year state.
+globs: ["app/context/session.ts", "app/hooks/useSessionContext.ts"]
+---
+
+- Use Clerk session as base, but augment with establishment + year context.
+- Create `useActiveEstablishment()` and `useActiveYear()` hooks.
+- Persist selection in URL as `/osha/[establishmentId]/[year]`.
+- All pages must redirect if session or establishment/year is missing.
+- Store active context in React Context Provider at layout level.
+- Revalidate tRPC queries when establishment or year changes.
+- Add `withSessionGuard()` HOC to block unauthenticated access to routes.
+- Reflect current context in header UI (dropdown + avatar + year selector).
+- Ensure tRPC `ctx` includes `establishmentId` and `year` on every call.

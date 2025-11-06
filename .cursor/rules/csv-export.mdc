@@ -1,0 +1,15 @@
+---
+description: Client-only rules for generating and exporting OSHA CSV files.
+globs: ["lib/csv/**", "app/**/export.tsx"]
+---
+
+- Only run CSV generation logic in browser, never on server.
+- Place all builders in `/lib/csv/`, one per OSHA form (300, 300A, 301).
+- All builders must be pure functions with typed inputs.
+- Validate every row against full OSHA field coverage before export.
+- If any required fields are missing, block export and show detailed errors.
+- Use `download(csvBlob, "OSHA_Form_300A.csv")` to trigger file save.
+- Match column headers to official OSHA schemas exactly.
+- Log successful exports via Sentry breadcrumb.
+- Include `csv-validator.ts` that enforces schema shape before writing file.
+- Allow preview mode of CSV before download (optional).

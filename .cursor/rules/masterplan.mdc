@@ -1,0 +1,61 @@
+---
+alwaysApply: true
+---
+
+---
+description: Top-level product vision, constraints, and architectural mandates for OSHA Logbook SaaS.
+globs: []
+alwaysApply: true
+---
+
+## Product Definition
+- Build OSHA Logbook: a SaaS web application that enables small manufacturing companies (<200 employees) to record OSHA injury/illness incidents, maintain annual tallies, and export STRICT-compliant CSV files for OSHA Form 300, OSHA Form 300A, and OSHA 301 (record details form).
+- Build the application so that non-technical safety officers understand instantly what to do: Add incident → export CSV → submit to OSHA ITA portal.
+
+## Core Value Proposition
+- Deliver total confidence that the exported CSVs match OSHA's required schemas exactly.
+- Remove the risk of incorrect reporting.
+- Remove the annual "scramble" to prepare OSHA 300A summary data.
+
+## Target User
+- Safety officers and HR managers inside small U.S. manufacturing plants who own OSHA logs but do not have software to manage it.
+
+## Constraints
+- DO NOT implement Stripe.
+- Use Clerk paid subscriptions for annual billing.
+- DO NOT generate OSHA CSV server-side.
+- ALWAYS generate OSHA CSV client-side in-browser at export time.
+- ALWAYS enforce STRICT CSV compliance: if ANY required field is missing → block export with an actionable error message.
+
+## Architecture Mandates
+- Frontend: Next.js 14, TypeScript, Tailwind v4, React Hook Form, Zod.
+- Backend: tRPC, Drizzle ORM, Neon serverless Postgres.
+- Auth + Billing: Clerk (email-only, one subscription per establishment/year).
+- File Storage: UploadThing.
+- Email: Resend.
+- Deployment: Railway.
+- Monitoring: Sentry (instrument CSV validation and export UX paths).
+
+## Data Model Critical Rule
+- ALWAYS support multiple establishments per single user.
+- ALWAYS support multi-year storage (Y2 model). Users may switch across years and export any year's CSV.
+
+## UX Core Workflow
+1) User signs in with Clerk.
+2) User creates one or more establishments.
+3) User selects a year.
+4) User logs incidents (OSHA 300/301 rows).
+5) System auto-aggregates 300A per establishment + per year.
+6) User clicks "Export CSV" → client-only CSV builder runs → validates → blocks if invalid → success only when STRICT schema passes → triggers browser download.
+
+## Business Rules
+- Pricing is $99/year per establishment (Clerk subscription).
+- Keep pricing simple.
+- One subscription per establishment per year unlocks that establishment's data for that calendar year.
+
+## Success Definition
+- A non-technical safety officer can onboard, create establishment, add incidents, and produce OSHA-compliant CSV files without support or instruction.
+
+## Futureproofing
+- DO NOT build PDF exports until after CSVs are perfect.
+- DO NOT build dashboards until CSV pipeline is production-locked.

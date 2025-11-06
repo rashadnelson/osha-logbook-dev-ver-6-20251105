@@ -1,0 +1,15 @@
+---
+description: API usage rules and standards for tRPC handlers using Drizzle ORM.
+globs: ["server/api/**/*.ts"]
+---
+
+- Use `ctx.db` (Drizzle instance) in all tRPC handlers; never reference Prisma.
+- Define all queries using `db.select().from(...)` with `eq()`, `and()`, and `sql` helpers.
+- Never perform mutations without checking Clerk session identity.
+- Add Sentry breadcrumb logs to all failed tRPC procedures with `Sentry.captureException`.
+- Always wrap DB access in try/catch with helpful error messages.
+- Infer procedure inputs using `z.object({...})` and `typeof schema._type`.
+- Always mark tRPC procedures with `.query()` or `.mutation()`.
+- When querying by `establishmentId` and `year`, enforce both filters explicitly.
+- Use `createTRPCRouter()` and `protectedProcedure` from `/server/api/trpc.ts`.
+- Structure folders by domain: e.g., `incidentRouter`, `establishmentRouter`, etc.

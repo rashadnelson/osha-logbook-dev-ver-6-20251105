@@ -1,0 +1,57 @@
+---
+alwaysApply: true
+---
+
+---
+description: Step-by-step architecture-first implementation phases for OSHA Logbook.
+globs: []
+alwaysApply: true
+---
+
+## Phase 1 — Skeleton & Guardrails
+- Create new Next.js 14 app with TypeScript
+- Install Tailwind v4, tRPC, Drizzle ORM, Neon, Clerk, Resend, UploadThing, Sentry
+- Scaffold base layout + empty dashboard route
+- DO NOT use Clerk orgs — use Clerk users + custom establishments table
+- Implement Neon connection and Drizzle schema baseline
+- Implement mandatory environment validation using `zod-env`
+
+## Phase 2 — Establishments
+- Implement full CRUD for establishments (Drizzle)
+- Each establishment must map 1:1 to a unique Clerk subscription
+- Build "Add Establishment" page with form validation (RHF + Zod)
+- Build "Select Year" UI — dropdown of available years per establishment + "Add Year" action
+
+## Phase 3 — OSHA 300/301 Incident Entry
+- Define `incidents` table(s) per OSHA CSV schema
+- Build incident entry form with full Zod field validation BEFORE save
+- Build paginated list of incidents for a given establishment and year
+
+## Phase 4 — OSHA 300A Computations
+- Write pure functions to compute OSHA 300A from 300/301 rows
+- DO NOT cache in DB — compute dynamically at runtime on each page load
+- Show computed 300A in UI with real-time tallies
+
+## Phase 5 — CSV Export (Client-Side ONLY)
+- Implement CSV builder pure function in `/lib/csv/`
+- Implement strict schema validator that ensures full field coverage before export
+- On "Export CSV" button → fetch incidents via tRPC → run CSV builder in-browser → trigger download
+- If ANY required fields are missing → block export with actionable error message
+
+## Phase 6 — Subscription Enforcement
+- Use Clerk paid subscriptions
+- Enforce subscription at write boundaries:
+  - Must have active subscription for given establishment + year
+- If not subscribed → show read-only preview state
+
+## Phase 7 — Email & File Uploads
+- Use Resend to send confirmation email when new year is created
+- Use UploadThing for optional document storage per incident (not required for CSV flow)
+
+## Phase 8 — Deployment and Monitoring
+- Deploy to Railway
+- Instrument with Sentry
+- Add tests:
+  - E2E tests with Playwright
+  - Component tests with React Testing Library
+  - Unit tests with Vitest for business logic + CSV builder

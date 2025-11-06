@@ -1,0 +1,7 @@
+﻿# node / next basics
+node_modules
+.next
+out
+.env
+.env.*
+pnpm-lock.yaml

@@ -1,0 +1,15 @@
+---
+description: Deployment constraints and environment validation rules for Railway.
+globs: [".env", "next.config.js", "scripts/**"]
+---
+
+- Validate `.env.production` contains all required variables before build step.
+- Block deploy if `DATABASE_URL`, `NEXTAUTH_SECRET`, or `CLERK_SECRET_KEY` are missing.
+- Configure Tailwind v4 postcss and content paths to avoid deployment-side style purge issues.
+- Upload Sentry source maps using `@sentry/nextjs` in `next.config.js`.
+- Use `process.env.NEXT_PUBLIC_APP_URL` for all absolute URLs in client logic.
+- Set `NODE_ENV=production` explicitly in Railway settings.
+- Enforce `pnpm install` via Railway build command override.
+- Add healthcheck route at `/api/health` that returns 200 OK.
+- Add logging for build phase to confirm Neon + Drizzle migrations succeeded.
+- Never hardcode any secrets or access keys in source files; always use env vars.

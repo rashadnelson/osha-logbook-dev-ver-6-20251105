@@ -1,0 +1,15 @@
+---
+description: Clerk email-only auth rules and per-establishment/year subscription enforcement.
+globs: ["app/**", "server/api/**/*.ts"]
+---
+
+- Only allow Clerk email-only login; never enable social or password providers.
+- Never use Clerk organizations; only use Clerk users tied to rows in `establishments`.
+- Use tRPC middleware to block mutations for unsubscribed users.
+- Always check for an active Clerk subscription before allowing write access.
+- Enforce subscription granularity: 1 subscription per establishment per calendar year.
+- In the UI, expose read-only mode when the user lacks an active subscription.
+- Build a `useSubscriptionStatus(establishmentId, year)` hook to centralize logic.
+- Expose active subscription state in Layout and form components.
+- Show upgrade CTA in all blocked mutation paths.
+- Deny access in API with `TRPCError({ code: "FORBIDDEN" })` if subscription is invalid.
